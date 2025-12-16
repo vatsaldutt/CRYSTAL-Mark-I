@@ -11,10 +11,8 @@ from PyQt5.QtCore import QTimer, QTime, QDate, Qt
 from nltk.stem.lancaster import LancasterStemmer
 from subprocess import getstatusoutput as cmd
 from pynput.keyboard import Key,Controller
-from playsound import playsound as ps
 from googletrans import Translator
 from PyQt5.QtPrintSupport import * 
-from credentials import API_OPENAI
 from Desktop import Ui_MainWindow
 import speech_recognition as sr
 from PyQt5 import QtCore, QtGui
@@ -170,7 +168,6 @@ eye_contact_list = []
 keyboard = Controller()
 cap = cv2.VideoCapture(0)
 first_time_weather = True
-openai.api_key = API_OPENAI
 stemmer = LancasterStemmer()
 font = cv2.FONT_HERSHEY_SIMPLEX
 detector = dlib.get_frontal_face_detector()
@@ -179,6 +176,8 @@ predictor = dlib.shape_predictor(f"{folder_location}Face Recognition/shape_predi
 with open(f'{folder_location}data/lang.txt', 'r') as data:
     language = data.read()
 
+
+openai.api_key = "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"
 
 engine = pyttsx3.init()
 voices = engine.getProperty('voices')
@@ -214,6 +213,31 @@ def voice_crystal(text):
     tts.save(f'{folder_location}audio.mp3')
     ps(f'{folder_location}audio.mp3')
     time.sleep(4)
+    with open(f"{folder_location}data/recognition.txt", 'w') as recognition:
+        recognition.write('')
+
+
+def voice_crystal(text):
+    text = reverse_translate(text)
+    print(text)
+
+    audio_path = f'{folder_location}audio.mp3'
+    tts = gTTS(text=text, lang=language, slow=False)
+    tts.save(audio_path)
+
+    # Platform-safe playback
+    if sys.platform == "darwin":        # macOS
+        os.system(f"afplay '{audio_path}'")
+    elif sys.platform.startswith("linux"):
+        os.system(f"mpg123 '{audio_path}'")
+    elif sys.platform.startswith("win"):
+        os.system(f'start "" "{audio_path}"')
+
+    try:
+        os.remove(audio_path)
+    except:
+        pass
+
     with open(f"{folder_location}data/recognition.txt", 'w') as recognition:
         recognition.write('')
 

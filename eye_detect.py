@@ -4,20 +4,21 @@ import dlib
 import cv2
 
 detector = dlib.get_frontal_face_detector()
-predictor = dlib.shape_predictor("/Users/vatsal/Desktop/CrystalOS/OpenAI/Face Recognition/shape_predictor_68_face_landmarks.dat")
+predictor = dlib.shape_predictor("./models/shape_predictor_68_face_landmarks.dat")
 font = cv2.FONT_HERSHEY_SIMPLEX
 
-def eye_contact(frame):
-    frame = frame
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+eye_contact_list = []
 
+def eye_contact(frame):
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     faces = detector(gray)
+
     for face in faces:
         x, y = face.left(), face.top()
         x1, y1 = face.right(), face.bottom()
         cv2.rectangle(frame, (x, y), (x1, y1), (150, 50, 0), 2)
         landmarks = predictor(gray, face)
-        
+
         gaze_ratio_left_eye = get_gaze_ratio([36, 37, 38, 39, 40, 41], landmarks, gray, frame)
         gaze_ratio_right_eye = get_gaze_ratio([42, 43, 44, 45, 46, 47], landmarks, gray, frame)
         gaze_ratio = (gaze_ratio_right_eye + gaze_ratio_left_eye) / 2
@@ -30,6 +31,7 @@ def eye_contact(frame):
             return "center"
         else:
             return "left"
+    return None
 
 
 def get_gaze_ratio(eye_points, facial_landmarks, gray, frame):
@@ -53,47 +55,57 @@ def get_gaze_ratio(eye_points, facial_landmarks, gray, frame):
     max_y = np.max(left_eye_region[:, 1])
 
     gray_eye = eye[min_y: max_y, min_x: max_x]
-    _, threshold_eye = cv2.threshold(gray_eye, 70, 255, cv2.THRESH_BINARY)
-    height, width = threshold_eye.shape
-    left_side_threshold = threshold_eye[0: height, 0: int(width / 2)]
-    left_side_white = cv2.countNonZero(left_side_threshold)
 
-    right_side_threshold = threshold_eye[0: height, int(width / 2): width]
-    right_side_white = cv2.countNonZero(right_side_threshold)
-    eye = cv2.resize(gray_eye, None, fx=6, fy=6)
+    if gray_eye.size == 0:
+        return 0
+
+    _, threshold_eye = cv2.threshold(gray_eye, 70, 255, cv2.THRESH_BINARY)
+    h, w = threshold_eye.shape
+
+    left_white = cv2.countNonZero(threshold_eye[:, :w // 2])
+    right_white = cv2.countNonZero(threshold_eye[:, w // 2:])
+
     try:
-        gaze_ratio = left_side_white/right_side_white
+        return left_white / right_white
     except:
-        gaze_ratio = 0
-    
-    return gaze_ratio
+        return 0
+
 
 def eye_mode(frame):
-    eye_contact_list = []
-    convert = {"right": 1, "center":2, "left": 3}
-    data = (eye_contact(frame))
-    if len(eye_contact_list) < 25:
-        try:
-            eye_contact_list.append(convert[data])
-        except:
-            pass
-    else:
-        del eye_contact_list[0]
-        try:
-            eye_contact_list.append(convert[data])
-        except:
-            pass
-        new_data = mode(eye_contact_list)
-        for key, value in convert.items():
-            if value == new_data:
-                return key
+    global eye_contact_list
 
-for i in range(15):
-    cap = cv2.VideoCapture(0)
-    _, frame = cap.read()
+    convert = {"right": 1, "center": 2, "left": 3}
+    data = eye_contact(frame)
+
+    if data in convert:
+        eye_contact_list.append(convert[data])
+
+    if len(eye_contact_list) > 25:
+        del eye_contact_list[0]
+
+    if len(eye_contact_list) < 25:
+        return None
+
+    new_data = mode(eye_contact_list)
+
+    for key, value in convert.items():
+        if value == new_data:
+            return key
+
+    return None
+
+cap = cv2.VideoCapture(0)
+
+for i in range(50):
+    ret, frame = cap.read()
+    if not ret:
+        break
+
     print(eye_mode(frame))
     cv2.imshow("Frame", frame)
-    key = cv2.waitKey(1)
-    if key == 27:
+
+    if cv2.waitKey(1) == 27:
         break
-    cap.release()
+
+cap.release()
+cv2.destroyAllWindows()
