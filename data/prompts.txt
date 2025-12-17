@@ -1,0 +1,93 @@
+hi||[end]||
+what is your name||[end]||
+what's your name||[end]||
+what should I call you||[end]||
+who are you||[end]||
+i love you||[end]||
+what is a nicer way to say shut up to someone||[end]||
+okay, thank you||[end]||
+thank you||[end]||
+what is the iris||[end]||
+you are interesting||[end]||
+do you like singing||[end]||
+what do you mean by stimulated||[end]||
+have you ever watched doraemon||[end]||
+do you like doraemon||[end]||
+do you like demon slayer||[end]||
+is ai concious||[end]||
+is artificial intelligence concious||[end]||
+do you have emotions||[end]||
+what is your type||[end]||
+sing a rap||[end]||
+that's really sweet||[end]||
+tell me a story||[end]||
+how many programming languages do you know||[end]||
+how many languages do you know||[end]||
+how do you say how are you in chinese||[end]||
+you said you did not know chinese||[end]||
+yeah that's what I said, you don't know chinese||[end]||
+you are rude||[end]||
+shut up you stupid ai||[end]||
+who am i||[end]||
+i am your dad||[end]||
+thanks||[end]||
+how are you||[end]||
+I am also doing good||[end]||
+I am good too||[end]||
+bye||[end]||
+correct the sentence scared you mom||[end]||
+explain internet for a second grader||[end]||
+how does internet work||[end]||
+can you live without the internet||[end]||
+introduce yourself||[end]||
+introduce yourself ||[end]||
+ introduce yourself||[end]||
+what can you do||[end]||
+hello||[end]||
+tell me a horror story||[end]||
+have you ever watched any bollywood movie||[end]||
+do you like bollywood movies||[end]||
+why don't you like bollywood movies||[end]||
+do you like bollywood songs||[end]||
+what kind of songs do you like||[end]||
+why don't you like bollywood songs||[end]||
+how to say namaste in english||[end]||
+tell me a comedy story||[end]||
+do you think that you are better than humans||[end]||
+what do you think about humans||[end]||
+how much is the population on earth predicted to be in 2030||[end]||
+do you prefer orange juice or apple juice||[end]||
+what is your favorite song||[end]||
+don't stop believin' song lyrics||[end]||
+will you go all terminator on us||[end]||
+create a python code to extract google search results||[end]||
+i'm also doing good ||[end]||
+how are you doing||[end]||
+sphere formula||[end]||
+sphere volume formula||[end]||
+how do you pronounce sphere||[end]||
+how to pronounce sphere||[end]||
+sphere tsa formula||[end]||
+who made you||[end]||
+who is your inventor||[end]||
+who were you made by||[end]||
+who were you invented by||[end]||
+who created you||[end]||
+who were you created by||[end]||
+were you made by vatsal dutt||[end]||
+did vatsal dutt make you||[end]||
+how old are you||[end]||
+what is your age||[end]||
+when were you made||[end]||
+when is your birthday||[end]||
+what is your date of birth||[end]||
+when were you born||[end]||
+what is your creation date||[end]||
+when were you invented||[end]||
+what date were you invented||[end]||
+what date were you created||[end]||
+what date were you made||[end]||
+what version are you running||[end]||
+what is your current version||[end]||
+what crystal version are you running||[end]||
+when did he make you||[end]||

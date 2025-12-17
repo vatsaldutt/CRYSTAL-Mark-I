@@ -1,0 +1,2 @@
+model_checkpoint_path: "/Users/vatsal/Desktop/CrystalOS/Crystal3.0/models/model.tflearn"
+all_model_checkpoint_paths: "/Users/vatsal/Desktop/CrystalOS/Crystal3.0/models/model.tflearn"
